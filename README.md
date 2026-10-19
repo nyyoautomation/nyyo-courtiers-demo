@@ -13,4 +13,4 @@ Three use cases:
 
 Every result cites its source (document, page, clause), runs a contradiction check (confirm or dismiss each item) and shows a human-review banner. The tool gives no advice and sends nothing to an insurer or client. Live input checks, triage and Word export run in the browser.
 
-Figures shown are estimates on the fictional sample, not promises. Pricing: on quote. Contact: LaborX (https://laborx.com/freelancers/users/id475124) · Remote · Worldwide.
+Figures shown are estimates on the fictional sample, not promises. Pricing: on quote. Available on LaborX · Remote · Worldwide.
