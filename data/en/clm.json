@@ -1,0 +1,427 @@
+{
+ "id": "clm",
+ "icon": "file-warning",
+ "name": "Pre-filled claim file",
+ "short": "Documents → claim notice",
+ "lead": "The documents the client sends are sorted, the claim notice fields are pre-filled with their source, and cover and notification deadline are checked. You review and submit.",
+ "project": {
+  "title": "Water damage in the workshop: Birchwood Joinery Ltd (fictional)",
+  "meta": [
+   [
+    "Policy",
+    "Commercial package CP-2026-0418 (fictional)"
+   ],
+   [
+    "Insurer",
+    "Alder Insurance (fictional)"
+   ],
+   [
+    "Documents received",
+    "5"
+   ],
+   [
+    "Claim notice",
+    "To submit"
+   ]
+  ],
+  "firm": "Horizon Brokers (fictional)"
+ },
+ "sources": [
+  {
+   "id": "S1",
+   "name": "Client_Claim_Email.eml",
+   "kind": "Client email",
+   "pages": 1,
+   "unit": "p."
+  },
+  {
+   "id": "S2",
+   "name": "Claim_Photos.zip",
+   "kind": "Captioned photos",
+   "pages": 6,
+   "unit": "photos"
+  },
+  {
+   "id": "S3",
+   "name": "Joint_Water_Damage_Report.pdf",
+   "kind": "Joint water damage report",
+   "pages": 2,
+   "unit": "p."
+  },
+  {
+   "id": "S4",
+   "name": "Plumber_Invoice.pdf",
+   "kind": "Plumber invoice",
+   "pages": 1,
+   "unit": "p."
+  },
+  {
+   "id": "S5",
+   "name": "Repair_Estimate.pdf",
+   "kind": "Repair estimate",
+   "pages": 2,
+   "unit": "p."
+  },
+  {
+   "id": "S6",
+   "name": "Policy_Schedule_2026.pdf",
+   "kind": "Policy schedule",
+   "pages": 12,
+   "unit": "p."
+  }
+ ],
+ "extracts": [
+  {
+   "id": "E1",
+   "src": "S1",
+   "page": 1,
+   "loc": "Message",
+   "text": "Leak found on Sunday, Oct 11 in the workshop. The ceiling dripped onto the workbench and the oak stock, about $4,300 of timber damaged."
+  },
+  {
+   "id": "E2",
+   "src": "S3",
+   "page": 1,
+   "loc": "Box 2",
+   "text": "Date of loss: Oct 13, 2026. Origin: pipe on the floor above (neighbour's flat, fictional)."
+  },
+  {
+   "id": "E3",
+   "src": "S4",
+   "page": 1,
+   "loc": "Work done",
+   "text": "Call-out on Oct 14, 2026: burst concealed pipe, repaired. $410."
+  },
+  {
+   "id": "E4",
+   "src": "S5",
+   "page": 1,
+   "loc": "Total",
+   "text": "Repair of the workshop ceiling and electrics: $8,050."
+  },
+  {
+   "id": "E5",
+   "src": "S2",
+   "page": 3,
+   "loc": "Photo 3",
+   "text": "Wet oak boards under the sagging ceiling."
+  },
+  {
+   "id": "E6",
+   "src": "S6",
+   "page": 5,
+   "loc": "Clause 5",
+   "text": "Water damage: covered, including burst concealed pipes. Deductible: $500."
+  },
+  {
+   "id": "E7",
+   "src": "S6",
+   "page": 11,
+   "loc": "Clause 18",
+   "text": "Claims must be notified within 5 working days of becoming aware of the loss."
+  },
+  {
+   "id": "E8",
+   "src": "S1",
+   "page": 1,
+   "loc": "Signature",
+   "text": "Paul Birch (fictional), managing director. Policy CP-2026-0418."
+  }
+ ],
+ "steps": [
+  "Sorting and reading the documents received",
+  "Pre-filling the claim notice fields",
+  "Checking cover and the notification deadline",
+  "Missing documents and contradictions flagged"
+ ],
+ "fields": [
+  {
+   "id": "date_sin",
+   "label": "Date of loss used",
+   "type": "date",
+   "value": "2026-10-11",
+   "unit": "",
+   "hint": "Date from the client's email: to confirm"
+  },
+  {
+   "id": "date_decl",
+   "label": "Date submitted to the insurer",
+   "type": "date",
+   "value": "2026-10-20",
+   "unit": "",
+   "hint": ""
+  },
+  {
+   "id": "montant",
+   "label": "Estimated amount of loss",
+   "type": "money",
+   "value": 12760,
+   "unit": "",
+   "hint": ""
+  }
+ ],
+ "checks": [
+  {
+   "id": "Q1",
+   "label": "Date of loss matches the joint report (Oct 13, 2026)",
+   "ref": "E2",
+   "rule": {
+    "f": "date_sin",
+    "op": "==",
+    "v": "2026-10-13",
+    "vf": null
+   },
+   "ok": "{date_sin}: matches the report",
+   "ko": "{date_sin}: differs from the report"
+  },
+  {
+   "id": "Q2",
+   "label": "Notified within 5 working days (by Oct 20, 2026)",
+   "ref": "E7",
+   "rule": {
+    "f": "date_decl",
+    "op": "<=",
+    "v": "2026-10-20",
+    "vf": null
+   },
+   "ok": "Submitted {date_decl}",
+   "ko": "Submitted {date_decl}: late"
+  },
+  {
+   "id": "Q3",
+   "label": "Amount above the deductible ($500)",
+   "ref": "E6",
+   "rule": {
+    "f": "montant",
+    "op": ">",
+    "v": 500,
+    "vf": null
+   },
+   "ok": "{montant} estimated",
+   "ko": "{montant}: below the deductible"
+  }
+ ],
+ "output": {
+  "title": "Pre-filled claim notice: draft for review",
+  "sub": "Each field shows the document it comes from. Nothing goes to the insurer without your approval.",
+  "sections": [
+   {
+    "h": "Claim notice",
+    "table": {
+     "head": [
+      "Field",
+      "Pre-filled value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Insured and policy",
+        "Birchwood Joinery Ltd, policy CP-2026-0418"
+       ],
+       "cite": [
+        "E8"
+       ]
+      },
+      {
+       "cells": [
+        "Date of loss",
+        "{date_sin}"
+       ],
+       "cite": [
+        "E1",
+        "E2"
+       ]
+      },
+      {
+       "cells": [
+        "Type and cause",
+        "Water damage: burst concealed pipe"
+       ],
+       "cite": [
+        "E3"
+       ]
+      },
+      {
+       "cells": [
+        "Third party",
+        "Neighbour on the floor above, joint report signed"
+       ],
+       "cite": [
+        "E2"
+       ]
+      },
+      {
+       "cells": [
+        "Damage",
+        "Workshop ceiling and electrics; oak stock"
+       ],
+       "cite": [
+        "E4",
+        "E5"
+       ]
+      },
+      {
+       "cells": [
+        "Estimated amount",
+        "{montant}"
+       ],
+       "cite": [
+        "E3",
+        "E4",
+        "E1"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "h": "Cover and deadline",
+    "items": [
+     {
+      "t": "Burst concealed pipe: covered under clause 5, deductible $500.",
+      "cite": [
+       "E6",
+       "E3"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Notification deadline: 5 working days. Planned submission: {date_decl}.",
+      "cite": [
+       "E7"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Documents",
+    "items": [
+     {
+      "t": "Received: joint report, plumber invoice, repair estimate, photos.",
+      "cite": [
+       "E2",
+       "E3",
+       "E4",
+       "E5"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Missing: proof of the oak stock's value (purchase invoice or inventory). Reminder to the client: [TO SEND after your review].",
+      "cite": [
+       "E1"
+      ],
+      "todo": true
+     }
+    ]
+   }
+  ]
+ },
+ "contradictions": [
+  {
+   "id": "C1",
+   "sev": "bad",
+   "title": "Two different dates of loss",
+   "sides": [
+    {
+     "e": "E1",
+     "label": "Client email",
+     "v": "Sunday, Oct 11"
+    },
+    {
+     "e": "E2",
+     "label": "Joint report",
+     "v": "Oct 13, 2026"
+    }
+   ],
+   "impact": "The date sets the notification deadline: from Oct 11, it would have expired on Oct 16.",
+   "action": "Have the client confirm the date before submitting.",
+   "live": "Q1"
+  },
+  {
+   "id": "C2",
+   "sev": "warn",
+   "title": "Stock claimed without proof",
+   "sides": [
+    {
+     "e": "E1",
+     "label": "Client email",
+     "v": "About $4,300 of timber"
+    },
+    {
+     "e": "E5",
+     "label": "Photo 3",
+     "v": "Wet boards, no value shown"
+    }
+   ],
+   "impact": "The insurer will ask for proof of value.",
+   "action": "Ask for an invoice or an inventory.",
+   "live": null
+  },
+  {
+   "id": "C3",
+   "sev": "ok",
+   "title": "Cause covered by the policy",
+   "sides": [
+    {
+     "e": "E3",
+     "label": "Plumber invoice",
+     "v": "Burst concealed pipe"
+    },
+    {
+     "e": "E6",
+     "label": "Policy schedule, clause 5",
+     "v": "Concealed pipes covered"
+    }
+   ],
+   "impact": "No discrepancy.",
+   "action": "Nothing to do.",
+   "live": null
+  }
+ ],
+ "value": {
+  "case": "water damage, 5 documents sent by the client, a 12-page policy.",
+  "rows": [
+   [
+    "Sort the documents and find the policy",
+    25,
+    3
+   ],
+   [
+    "Fill in the insurer's claim form",
+    25,
+    4
+   ],
+   [
+    "Check cover, deductible and deadline",
+    20,
+    3
+   ],
+   [
+    "Write the reminder for missing documents",
+    15,
+    3
+   ]
+  ],
+  "stats": [
+   [
+    "2",
+    "issues to settle before submitting"
+   ],
+   [
+    "1",
+    "missing document caught on first reading"
+   ]
+  ],
+  "errors": [
+   "a wrong date of loss that changes the notification deadline",
+   "stock claimed without proof"
+  ],
+  "total": [
+   85,
+   13
+  ]
+ },
+ "docx": "claim-notice-birchwood-draft"
+}

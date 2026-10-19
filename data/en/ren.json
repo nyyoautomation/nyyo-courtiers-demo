@@ -1,0 +1,460 @@
+{
+ "id": "ren",
+ "icon": "refresh-cw",
+ "name": "Renewal & coverage gaps",
+ "short": "Expiring policy vs renewal offer",
+ "lead": "Before the renewal date, the renewal offer is compared clause by clause with the expiring policy and the client's updated situation. What got worse, what is missing and what changed shows up before anyone signs.",
+ "project": {
+  "title": "Jan 1, 2027 renewal of the commercial package for Birchwood Joinery Ltd (fictional)",
+  "meta": [
+   [
+    "Current insurer",
+    "Alder Insurance (fictional)"
+   ],
+   [
+    "Renewal date",
+    "Jan 1, 2027"
+   ],
+   [
+    "Notice period",
+    "2 months"
+   ],
+   [
+    "Premium change",
+    "+2%"
+   ]
+  ],
+  "firm": "Horizon Brokers (fictional)"
+ },
+ "sources": [
+  {
+   "id": "S1",
+   "name": "Policy_Schedule_2026.pdf",
+   "kind": "Expiring policy schedule",
+   "pages": 12,
+   "unit": "p."
+  },
+  {
+   "id": "S2",
+   "name": "Renewal_Offer_2027.pdf",
+   "kind": "Renewal offer",
+   "pages": 10,
+   "unit": "p."
+  },
+  {
+   "id": "S3",
+   "name": "Client_Update.pdf",
+   "kind": "Updated client fact sheet",
+   "pages": 3,
+   "unit": "p."
+  },
+  {
+   "id": "S4",
+   "name": "Client_Email_Sep9.eml",
+   "kind": "Client email",
+   "pages": 1,
+   "unit": "p."
+  }
+ ],
+ "extracts": [
+  {
+   "id": "E1",
+   "src": "S1",
+   "page": 4,
+   "loc": "Clause 3",
+   "text": "Water damage deductible: $500."
+  },
+  {
+   "id": "E2",
+   "src": "S2",
+   "page": 4,
+   "loc": "Clause 3",
+   "text": "Water damage deductible: $1,500."
+  },
+  {
+   "id": "E3",
+   "src": "S2",
+   "page": 2,
+   "loc": "Insured locations",
+   "text": "Insured location: workshop, 12 Tanner Street, Ashby Vale (fictional)."
+  },
+  {
+   "id": "E4",
+   "src": "S4",
+   "page": 1,
+   "loc": "Email of Sep 9, 2026",
+   "text": "Since September we rent a 300 m2 warehouse in Millbrook (fictional) for our timber stock."
+  },
+  {
+   "id": "E5",
+   "src": "S2",
+   "page": 3,
+   "loc": "Sums insured",
+   "text": "Equipment and machinery: $410,000."
+  },
+  {
+   "id": "E6",
+   "src": "S3",
+   "page": 1,
+   "loc": "Equipment",
+   "text": "CNC machining centre bought in June 2026 ($150,000). Total equipment: $560,000."
+  },
+  {
+   "id": "E7",
+   "src": "S2",
+   "page": 7,
+   "loc": "Clause 9.4, new",
+   "text": "Excluded: non-physical loss arising from a cyber attack."
+  },
+  {
+   "id": "E8",
+   "src": "S1",
+   "page": 7,
+   "loc": "Clause 9",
+   "text": "Exclusions: war, intentional acts, wear and tear. No cyber attack exclusion."
+  },
+  {
+   "id": "E9",
+   "src": "S1",
+   "page": 2,
+   "loc": "Liability",
+   "text": "General liability: $3,000,000 per occurrence."
+  },
+  {
+   "id": "E10",
+   "src": "S2",
+   "page": 2,
+   "loc": "Liability",
+   "text": "General liability: $3,000,000 per occurrence."
+  },
+  {
+   "id": "E11",
+   "src": "S3",
+   "page": 1,
+   "loc": "Business",
+   "text": "Estimated 2026 revenue: $1,700,000 ($1,300,000 in 2025)."
+  }
+ ],
+ "steps": [
+  "Reading the expiring policy and the renewal offer",
+  "Clause-by-clause comparison",
+  "Checking against the client fact sheet and recent emails",
+  "Coverage gaps and questions for the insurer"
+ ],
+ "fields": [
+  {
+   "id": "capital",
+   "label": "Machinery sum insured declared",
+   "type": "money",
+   "value": 410000,
+   "unit": "",
+   "hint": "Value taken from the renewal offer"
+  },
+  {
+   "id": "sites",
+   "label": "Number of insured locations",
+   "type": "number",
+   "value": 1,
+   "unit": "locations",
+   "hint": ""
+  },
+  {
+   "id": "date_client",
+   "label": "Client review meeting",
+   "type": "date",
+   "value": "2026-10-26",
+   "unit": "",
+   "hint": ""
+  }
+ ],
+ "checks": [
+  {
+   "id": "Q1",
+   "label": "Machinery sum insured at least the real equipment value ($560,000)",
+   "ref": "E6",
+   "rule": {
+    "f": "capital",
+    "op": ">=",
+    "v": 560000,
+    "vf": null
+   },
+   "ok": "{capital} declared: equipment covered",
+   "ko": "{capital} declared for $560,000 of equipment"
+  },
+  {
+   "id": "Q2",
+   "label": "All client locations insured (2)",
+   "ref": "E4",
+   "rule": {
+    "f": "sites",
+    "op": ">=",
+    "v": 2,
+    "vf": null
+   },
+   "ok": "{sites} locations declared",
+   "ko": "{sites} location declared for 2 locations in use"
+  },
+  {
+   "id": "Q3",
+   "label": "Client meeting before the notice deadline (Oct 31, 2026)",
+   "ref": "E2",
+   "rule": {
+    "f": "date_client",
+    "op": "<=",
+    "v": "2026-10-31",
+    "vf": null
+   },
+   "ok": "Meeting on {date_client}",
+   "ko": "Meeting on {date_client}: after the notice deadline"
+  }
+ ],
+ "output": {
+  "title": "Renewal review: client note, draft",
+  "sub": "Each change shows the expiring clause and the renewal clause.",
+  "sections": [
+   {
+    "h": "What changes at renewal",
+    "items": [
+     {
+      "t": "The water damage deductible goes from $500 to $1,500, for a 2% higher premium.",
+      "cite": [
+       "E1",
+       "E2"
+      ],
+      "todo": false
+     },
+     {
+      "t": "New exclusion of non-physical loss from a cyber attack (absent from the expiring policy).",
+      "cite": [
+       "E7",
+       "E8"
+      ],
+      "todo": false
+     },
+     {
+      "t": "General liability limit unchanged at $3,000,000.",
+      "cite": [
+       "E9",
+       "E10"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Coverage gaps given your situation",
+    "items": [
+     {
+      "t": "The warehouse rented since September is not an insured location: {sites} location(s) declared.",
+      "cite": [
+       "E3",
+       "E4"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Machinery sum insured declared: {capital}, against $560,000 of equipment since the CNC purchase. Underinsurance risk.",
+      "cite": [
+       "E5",
+       "E6"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Revenue up from $1,300,000 to $1,700,000: to declare for liability and business interruption.",
+      "cite": [
+       "E11"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Questions for the insurer",
+    "items": [
+     {
+      "t": "Keep the water damage deductible at $500, or justify the increase.",
+      "cite": [
+       "E2"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Add the Millbrook warehouse and raise the machinery sum insured to $560,000.",
+      "cite": [
+       "E4",
+       "E6"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Offer separate cyber cover if the exclusion stays.",
+      "cite": [
+       "E7"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Next step",
+    "items": [
+     {
+      "t": "Client meeting on {date_client}, before the notice deadline.",
+      "cite": [
+       "E2"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Re-market the risk if the insurer declines: [TO DECIDE with the client].",
+      "cite": [],
+      "todo": true
+     }
+    ]
+   }
+  ]
+ },
+ "contradictions": [
+  {
+   "id": "C1",
+   "sev": "bad",
+   "title": "Water damage deductible tripled",
+   "sides": [
+    {
+     "e": "E1",
+     "label": "Expiring policy",
+     "v": "$500"
+    },
+    {
+     "e": "E2",
+     "label": "Renewal 2027",
+     "v": "$1,500"
+    }
+   ],
+   "impact": "Cover gets worse while the premium goes up.",
+   "action": "Negotiate, or tell the client in writing.",
+   "live": null
+  },
+  {
+   "id": "C2",
+   "sev": "bad",
+   "title": "Uninsured location: the warehouse rented in September",
+   "sides": [
+    {
+     "e": "E4",
+     "label": "Client email",
+     "v": "300 m2 warehouse rented"
+    },
+    {
+     "e": "E3",
+     "label": "Renewal 2027",
+     "v": "Workshop only"
+    }
+   ],
+   "impact": "A loss at the warehouse would not be covered.",
+   "action": "Have the location added before renewal.",
+   "live": "Q2"
+  },
+  {
+   "id": "C3",
+   "sev": "bad",
+   "title": "Machinery sum insured too low",
+   "sides": [
+    {
+     "e": "E5",
+     "label": "Renewal 2027",
+     "v": "$410,000"
+    },
+    {
+     "e": "E6",
+     "label": "Client fact sheet",
+     "v": "$560,000"
+    }
+   ],
+   "impact": "Underinsurance: the claim payment would be reduced proportionally.",
+   "action": "Update the declared sum insured.",
+   "live": "Q1"
+  },
+  {
+   "id": "C4",
+   "sev": "warn",
+   "title": "New cyber exclusion",
+   "sides": [
+    {
+     "e": "E8",
+     "label": "Expiring policy, clause 9",
+     "v": "No exclusion"
+    },
+    {
+     "e": "E7",
+     "label": "Renewal, clause 9.4",
+     "v": "Cyber attack excluded"
+    }
+   ],
+   "impact": "A quiet change in cover.",
+   "action": "Inform the client and propose a solution.",
+   "live": null
+  },
+  {
+   "id": "C5",
+   "sev": "ok",
+   "title": "General liability unchanged",
+   "sides": [
+    {
+     "e": "E9",
+     "label": "Expiring policy",
+     "v": "$3,000,000"
+    },
+    {
+     "e": "E10",
+     "label": "Renewal 2027",
+     "v": "$3,000,000"
+    }
+   ],
+   "impact": "No discrepancy.",
+   "action": "Nothing to do.",
+   "live": null
+  }
+ ],
+ "value": {
+  "case": "commercial package renewal: expiring policy (12 pages), renewal offer (10 pages), client fact sheet and one recent email.",
+  "rows": [
+   [
+    "Compare both policies clause by clause",
+    120,
+    10
+   ],
+   [
+    "Check against the client's current situation",
+    40,
+    5
+   ],
+   [
+    "Write the client note and the questions",
+    45,
+    10
+   ]
+  ],
+  "stats": [
+   [
+    "3",
+    "coverage gaps caught before the renewal date"
+   ],
+   [
+    "1",
+    "cover reduced despite a premium increase"
+   ]
+  ],
+  "errors": [
+   "an uninsured rented location",
+   "underinsured machinery",
+   "an exclusion added without being flagged"
+  ],
+  "total": [
+   205,
+   25
+  ]
+ },
+ "docx": "renewal-review-birchwood-draft"
+}

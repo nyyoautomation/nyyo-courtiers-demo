@@ -1,0 +1,534 @@
+{
+ "id": "cmp",
+ "icon": "scale",
+ "name": "Quote comparison & advice",
+ "short": "Insurer quotes → suitability record",
+ "lead": "The quotes from a marketing exercise are aligned on one coverage grid, every value sourced, then checked against the needs gathered from the client. You pick the offer; the tool drafts the advice and suitability record.",
+ "project": {
+  "title": "Commercial package (property, business interruption, liability) marketing for Birchwood Joinery Ltd (fictional)",
+  "meta": [
+   [
+    "Client",
+    "Joinery workshop, 8 staff"
+   ],
+   [
+    "Risk",
+    "600 m2 workshop, machinery, stock"
+   ],
+   [
+    "Insurers approached",
+    "3 (fictional)"
+   ],
+   [
+    "Requested start",
+    "Dec 1, 2026"
+   ]
+  ],
+  "firm": "Horizon Brokers (fictional)"
+ },
+ "sources": [
+  {
+   "id": "S1",
+   "name": "Needs_Questionnaire_Birchwood.pdf",
+   "kind": "Signed needs questionnaire",
+   "pages": 4,
+   "unit": "p."
+  },
+  {
+   "id": "S2",
+   "name": "Quote_Alder.pdf",
+   "kind": "Alder Insurance quote (fictional)",
+   "pages": 6,
+   "unit": "p."
+  },
+  {
+   "id": "S3",
+   "name": "Quote_Northwind.pdf",
+   "kind": "Northwind Mutual quote (fictional)",
+   "pages": 5,
+   "unit": "p."
+  },
+  {
+   "id": "S4",
+   "name": "Quote_Cobalt.pdf",
+   "kind": "Cobalt General quote (fictional)",
+   "pages": 7,
+   "unit": "p."
+  },
+  {
+   "id": "S5",
+   "name": "Northwind_Policy_Wording.pdf",
+   "kind": "Northwind policy wording",
+   "pages": 48,
+   "unit": "p."
+  }
+ ],
+ "extracts": [
+  {
+   "id": "E1",
+   "src": "S1",
+   "page": 2,
+   "loc": "Section 2 Needs",
+   "text": "Business interruption for 12 months, including after a machinery breakdown. Machinery breakdown cover on the equipment ($410,000). Deductible: $1,000 maximum."
+  },
+  {
+   "id": "E2",
+   "src": "S1",
+   "page": 3,
+   "loc": "Section 3 Requirements",
+   "text": "General liability of at least $3,000,000 per occurrence, required by the main customer's master contract. Budget: $9,500 a year at most, taxes included."
+  },
+  {
+   "id": "E3",
+   "src": "S2",
+   "page": 2,
+   "loc": "Schedule of cover",
+   "text": "General liability $3,000,000; machinery breakdown included; business interruption 12 months; annual premium $9,400."
+  },
+  {
+   "id": "E4",
+   "src": "S2",
+   "page": 4,
+   "loc": "Deductibles",
+   "text": "Standard deductible: 10% of the loss, minimum $500, maximum $3,000."
+  },
+  {
+   "id": "E5",
+   "src": "S3",
+   "page": 2,
+   "loc": "Schedule of cover",
+   "text": "General liability $3,000,000; machinery breakdown included; business interruption 12 months; deductible $1,000; annual premium $9,100."
+  },
+  {
+   "id": "E6",
+   "src": "S5",
+   "page": 31,
+   "loc": "Clause 14.3",
+   "text": "Business interruption following a machinery breakdown is limited to an indemnity period of 6 months."
+  },
+  {
+   "id": "E7",
+   "src": "S4",
+   "page": 3,
+   "loc": "Schedule of cover",
+   "text": "General liability $2,000,000; machinery breakdown optional (+$650); business interruption 12 months; deductible $1,000; annual premium $8,400 without the option."
+  },
+  {
+   "id": "E8",
+   "src": "S4",
+   "page": 6,
+   "loc": "Exclusions",
+   "text": "Damage to machines over 15 years old is excluded unless declared and surveyed beforehand."
+  },
+  {
+   "id": "E9",
+   "src": "S1",
+   "page": 1,
+   "loc": "Section 1 Situation",
+   "text": "Equipment: 11 machines, 2 of them over 15 years old (panel saw and jointer)."
+  }
+ ],
+ "steps": [
+  "Reading the signed needs questionnaire",
+  "Extracting cover from the 3 quotes and the policy wording",
+  "Aligning on one grid, units and deductibles normalised",
+  "Checking against the needs, contradictions flagged"
+ ],
+ "fields": [
+  {
+   "id": "prime",
+   "label": "Premium of the chosen offer",
+   "type": "money",
+   "value": 9400,
+   "unit": "",
+   "hint": ""
+  },
+  {
+   "id": "deduct",
+   "label": "Maximum deductible the client accepts",
+   "type": "money",
+   "value": 1000,
+   "unit": "",
+   "hint": "Value from the needs questionnaire: to review with the client"
+  },
+  {
+   "id": "motif",
+   "label": "Reason for the recommendation",
+   "type": "text",
+   "value": "Only offer with $3M liability, machinery breakdown and 12 months of business interruption with no restriction",
+   "unit": "",
+   "hint": ""
+  },
+  {
+   "id": "date_fic",
+   "label": "Advice record handed to the client",
+   "type": "date",
+   "value": "2026-11-20",
+   "unit": "",
+   "hint": ""
+  }
+ ],
+ "checks": [
+  {
+   "id": "Q1",
+   "label": "Premium within the client's budget ($9,500)",
+   "ref": "E2",
+   "rule": {
+    "f": "prime",
+    "op": "<=",
+    "v": 9500,
+    "vf": null
+   },
+   "ok": "{prime}: within budget",
+   "ko": "{prime}: over budget"
+  },
+  {
+   "id": "Q2",
+   "label": "Offer's maximum deductible ($3,000) accepted",
+   "ref": "E4",
+   "rule": {
+    "f": "deduct",
+    "op": ">=",
+    "v": 3000,
+    "vf": null
+   },
+   "ok": "Client agrees up to {deduct}",
+   "ko": "Client capped at {deduct}: confirm with them"
+  },
+  {
+   "id": "Q3",
+   "label": "Recommendation reasoned",
+   "ref": "E1",
+   "rule": {
+    "f": "motif",
+    "op": "nonempty",
+    "v": null,
+    "vf": null
+   },
+   "ok": "Reason recorded",
+   "ko": "Reason to write"
+  },
+  {
+   "id": "Q4",
+   "label": "Advice record handed over before binding (Dec 1, 2026)",
+   "ref": "E2",
+   "rule": {
+    "f": "date_fic",
+    "op": "<",
+    "v": "2026-12-01",
+    "vf": null
+   },
+   "ok": "Handed over {date_fic}",
+   "ko": "Handed over {date_fic}: too late"
+  }
+ ],
+ "output": {
+  "title": "Offer comparison and advice record: draft",
+  "sub": "Each value links to the page of the quote or policy wording. The chosen offer and its reasoning remain your decision.",
+  "sections": [
+   {
+    "h": "Comparison on the grid",
+    "table": {
+     "head": [
+      "Cover",
+      "Alder",
+      "Northwind",
+      "Cobalt"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Annual premium",
+        "$9,400",
+        "$9,100",
+        "$8,400 (+$650 option)"
+       ],
+       "cite": [
+        "E3",
+        "E5",
+        "E7"
+       ]
+      },
+      {
+       "cells": [
+        "General liability",
+        "$3,000,000",
+        "$3,000,000",
+        "$2,000,000"
+       ],
+       "cite": [
+        "E3",
+        "E5",
+        "E7"
+       ]
+      },
+      {
+       "cells": [
+        "Machinery breakdown",
+        "Included",
+        "Included",
+        "Optional, machines over 15 years excluded"
+       ],
+       "cite": [
+        "E3",
+        "E5",
+        "E7",
+        "E8"
+       ]
+      },
+      {
+       "cells": [
+        "Business interruption",
+        "12 months",
+        "12 months, but 6 months after breakdown (wording)",
+        "12 months"
+       ],
+       "cite": [
+        "E3",
+        "E5",
+        "E6",
+        "E7"
+       ]
+      },
+      {
+       "cells": [
+        "Standard deductible",
+        "10%, $500 to $3,000",
+        "$1,000",
+        "$1,000"
+       ],
+       "cite": [
+        "E4",
+        "E5",
+        "E7"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "h": "Client requirements and needs",
+    "items": [
+     {
+      "t": "Business interruption for 12 months, including after a machinery breakdown; breakdown cover on $410,000 of equipment; deductible of $1,000 at most.",
+      "cite": [
+       "E1"
+      ],
+      "todo": false
+     },
+     {
+      "t": "General liability of at least $3,000,000, required by the main customer; budget of $9,500 a year at most.",
+      "cite": [
+       "E2"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Recommended offer and reasoning",
+    "items": [
+     {
+      "t": "Recommended offer: Alder Insurance, {prime} a year. Reason: {motif}.",
+      "cite": [
+       "E3"
+      ],
+      "todo": false
+     },
+     {
+      "t": "To confirm with the client: a percentage deductible that can reach $3,000, above the $1,000 requested. Current agreement: {deduct}.",
+      "cite": [
+       "E4",
+       "E1"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Northwind is not recommended as it stands: its wording limits business interruption after a breakdown to 6 months. A special clause extending it to 12 months would change the analysis.",
+      "cite": [
+       "E6"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Cobalt does not meet the $3,000,000 liability requirement and excludes 2 of the machines.",
+      "cite": [
+       "E7",
+       "E8",
+       "E9"
+      ],
+      "todo": false
+     }
+    ]
+   },
+   {
+    "h": "Advice and suitability record",
+    "items": [
+     {
+      "t": "Handed to the client on {date_fic}, before the planned binding on Dec 1, 2026.",
+      "cite": [
+       "E2"
+      ],
+      "todo": false
+     },
+     {
+      "t": "Brokerage disclosures, licence details and remuneration: [TO COMPLETE with your brokerage's wording].",
+      "cite": [],
+      "todo": true
+     },
+     {
+      "t": "Client and broker signatures: [TO COMPLETE].",
+      "cite": [],
+      "todo": true
+     }
+    ]
+   }
+  ]
+ },
+ "contradictions": [
+  {
+   "id": "C1",
+   "sev": "bad",
+   "title": "Northwind: the quote shows 12 months of business interruption, the wording caps it at 6 after a breakdown",
+   "sides": [
+    {
+     "e": "E5",
+     "label": "Northwind quote",
+     "v": "12 months"
+    },
+    {
+     "e": "E6",
+     "label": "Northwind wording, clause 14.3",
+     "v": "6 months after a breakdown"
+    }
+   ],
+   "impact": "The client's main need would be only half covered.",
+   "action": "Ask Northwind for a special clause, or set the offer aside.",
+   "live": null
+  },
+  {
+   "id": "C2",
+   "sev": "warn",
+   "title": "Deductibles that don't compare: percentage versus flat",
+   "sides": [
+    {
+     "e": "E4",
+     "label": "Alder quote",
+     "v": "10%, $500 to $3,000"
+    },
+    {
+     "e": "E1",
+     "label": "Needs questionnaire",
+     "v": "$1,000 maximum"
+    }
+   ],
+   "impact": "On a large loss, Alder's deductible can be three times what the client asked for.",
+   "action": "Get the client's agreement and write it in the advice record.",
+   "live": "Q2"
+  },
+  {
+   "id": "C3",
+   "sev": "bad",
+   "title": "Cobalt: liability below the customer's requirement",
+   "sides": [
+    {
+     "e": "E7",
+     "label": "Cobalt quote",
+     "v": "$2,000,000"
+    },
+    {
+     "e": "E2",
+     "label": "Needs questionnaire, section 3",
+     "v": "$3,000,000 minimum"
+    }
+   ],
+   "impact": "The client could lose its main customer contract.",
+   "action": "Set the offer aside or ask for a higher limit.",
+   "live": null
+  },
+  {
+   "id": "C4",
+   "sev": "warn",
+   "title": "Cobalt: 2 machines excluded from breakdown cover",
+   "sides": [
+    {
+     "e": "E8",
+     "label": "Cobalt quote, exclusions",
+     "v": "Machines over 15 years excluded"
+    },
+    {
+     "e": "E9",
+     "label": "Needs questionnaire, section 1",
+     "v": "2 machines over 15 years old"
+    }
+   ],
+   "impact": "Part of the equipment would not be covered.",
+   "action": "Flag the exclusion to the client if the offer stays on the table.",
+   "live": null
+  },
+  {
+   "id": "C5",
+   "sev": "ok",
+   "title": "Chosen offer's premium within the client's budget",
+   "sides": [
+    {
+     "e": "E2",
+     "label": "Needs questionnaire",
+     "v": "$9,500 maximum"
+    },
+    {
+     "e": "prime",
+     "label": "Your input",
+     "v": "{prime}"
+    }
+   ],
+   "impact": "No discrepancy.",
+   "action": "Nothing to do.",
+   "live": "Q1"
+  }
+ ],
+ "value": {
+  "case": "3 insurers approached, 3 quotes, 48 pages of policy wording, one signed needs questionnaire.",
+  "rows": [
+   [
+    "Read quotes and wording, build the comparison table",
+    150,
+    15
+   ],
+   [
+    "Check each offer against the client's needs",
+    45,
+    5
+   ],
+   [
+    "Write the recommendation and advice record",
+    60,
+    10
+   ],
+   [
+    "Re-read deductibles, limits and exclusions",
+    20,
+    5
+   ]
+  ],
+  "stats": [
+   [
+    "4",
+    "contradictions caught before meeting the client, with sources"
+   ],
+   [
+    "3/3",
+    "offers aligned on the same grid"
+   ]
+  ],
+  "errors": [
+   "a policy wording limit missing from the quote",
+   "an offer below the customer's liability requirement"
+  ],
+  "total": [
+   275,
+   35
+  ]
+ },
+ "docx": "offer-comparison-advice-record-birchwood-draft"
+}
