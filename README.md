@@ -3,7 +3,6 @@
 No sign-up demo, fictional data only, replay mode (pre-recorded analyses).
 
 - **English (international):** https://nyyoautomation.github.io/nyyo-courtiers-demo/
-- **Français :** https://nyyoautomation.github.io/nyyo-courtiers-demo/fr/
 
 Three use cases:
 

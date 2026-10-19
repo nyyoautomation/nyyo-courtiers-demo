@@ -83,7 +83,7 @@
    "src": "S4",
    "page": 1,
    "loc": "Email of Sep 9, 2026",
-   "text": "Since September we rent a 300 m2 warehouse in Millbrook (fictional) for our timber stock."
+   "text": "Since September we rent a 300 m² warehouse in Millbrook (fictional) for our timber stock."
   },
   {
    "id": "E5",
@@ -344,7 +344,7 @@
     {
      "e": "E4",
      "label": "Client email",
-     "v": "300 m2 warehouse rented"
+     "v": "300 m² warehouse rented"
     },
     {
      "e": "E3",
