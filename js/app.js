@@ -1,11 +1,10 @@
 /* Nyyo — AI demo for insurance brokers. Static, replay mode, fictional data only. */
 (function () {
   "use strict";
-  const LANG = /^fr/i.test(document.documentElement.lang || "") ? "fr" : "en";
-  const BASE = document.body.dataset.base || "./data/" + LANG + "/";
+  const BASE = document.body.dataset.base || "./data/en/";
   const ORDER = ["cmp", "ren", "clm"];
   const loc = "en-US";
-  const SEP = LANG === "fr" ? " :" : ":";
+  const SEP = ":";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -25,26 +24,6 @@
     document.head.appendChild(s);
   }));
   const T = {
-    fr: {
-      page: "p.", min: (m) => (m >= 60 ? Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "") : m + " min"),
-      money: (n) => Number(n).toLocaleString(loc) + " \u20ac",
-      sev: { bad: "Contradiction", warn: "À vérifier", ok: "Cohérent" }, resolved: "Résolu par votre saisie",
-      confirm: "Confirmer", dismiss: "Écarter", confirmed: "Confirmé", dismissed: "Écarté", pending: "À trancher",
-      triage: (c, d, p) => `${c} confirmé(s) · ${d} écarté(s) · ${p} à trancher`,
-      checksOk: (n, t) => `${n}/${t} contrôles au vert`, impact: "Impact", action: "Action proposée",
-      todo: "À compléter", srcKicker: "Extrait de la pièce (fictive)", openSrc: "Voir l'extrait", fromDoc: "Extraits utilisés dans cette pièce",
-      inputKicker: "Votre saisie", stale: "Vos saisies ont changé : le brouillon est mis à jour.",
-            total: "Total", errAvoid: "Erreurs évitées sur cet échantillon fictif : ",
-      docxLoading: "La bibliothèque Word n'a pas pu se charger. Vérifiez votre connexion et réessayez.",
-      docxWarn: "RELECTURE HUMAINE OBLIGATOIRE. Données fictives de démonstration. Votre cabinet reste seul responsable du conseil donné et de tout document réel. Les écarts signalés sont des propositions : le courtier tranche.",
-      docxHeader: "Brouillon · relecture humaine obligatoire · données fictives",
-      contra: "Contrôle des contradictions", checks: "Contrôles sur vos saisies", srcAppx: "Annexe : sources citées",
-      ctHdr: ["Statut", "Écart", "Pièces en cause", "Décision"], ckHdr: ["Contrôle", "Résultat", "Réf."],
-      footer: "Généré par la démo Nyyo Automation · données fictives · ne remplace pas le conseil du courtier",
-      pageOf: ["Page ", " / "], weight: (w) => ` (${w} %)`, project: "Projet", firm: "Cabinet",
-      title: (n) => `${n} — IA pour courtiers en assurance · Nyyo Automation`, loadFail: "Échec du chargement des données : ",
-      genFirst: "Lancez d'abord l'analyse.", srcLbl: "Sources", more: "Lire la suite", best: "Meilleur", viewSrc: (n) => `Voir les sources (${n})`, byHand: "À la main (estim.)", withTool: "Avec l'outil (estim.)", printWarn: "RELECTURE HUMAINE OBLIGATOIRE · exemple fictif",
-    },
     en: {
       page: "p.", min: (m) => (m >= 60 ? Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "") : m + " min"),
       money: (n) => "$" + Number(n).toLocaleString(loc),
@@ -65,7 +44,7 @@
       title: (n) => `${n}: AI for insurance brokers · Nyyo Automation`, loadFail: "Demo data failed to load: ",
       genFirst: "Run the analysis first.", srcLbl: "Sources", more: "Read more", best: "Best", viewSrc: (n) => `View sources (${n})`, byHand: "By hand (est.)", withTool: "With the tool (est.)", printWarn: "HUMAN REVIEW REQUIRED · fictional sample",
     },
-  }[LANG];
+  }.en;
 
   const ALL = {};
   const st = { u: null, form: {}, triage: {}, ready: false, runId: 0 };
@@ -75,7 +54,7 @@
 
   /* ---------- formatting & rules ---------- */
   const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  function fmtDate(v) { if (!v) return "—"; const [y, m, d] = v.split("-"); return LANG === "fr" ? `${d}/${m}/${y}` : `${MON[Number(m) - 1]} ${Number(d)}, ${y}`; }
+  function fmtDate(v) { if (!v) return "—"; const [y, m, d] = v.split("-"); return `${MON[Number(m) - 1]} ${Number(d)}, ${y}`; }
   function fmt(id, v) {
     const f = fieldDef(id); if (!f) return String(v);
     if (f.type === "money") return T.money(v || 0);
@@ -157,7 +136,7 @@
       `<div class="m-card m-total"><strong class="m-title">${T.total}</strong><div class="m-ba"><span><small>${T.byHand}</small><b class="v-before">${T.min(v.total[0])}</b></span><span><small>${T.withTool}</small><b class="v-after">${T.min(v.total[1])}</b></span></div></div>`;
     const stats = v.stats;
     $("#valueStats").innerHTML = stats.map((s) => `<div class="v-stat"><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div>`).join("") +
-      `<div class="v-stat v-err"><span><strong>${T.errAvoid}</strong>${v.errors.map(esc).join(LANG === "fr" ? " ; " : "; ")}.</span></div>`;
+      `<div class="v-stat v-err"><span><strong>${T.errAvoid}</strong>${v.errors.map(esc).join("; ")}.</span></div>`;
   }
 
   /* ---------- project & sources ---------- */
@@ -216,7 +195,7 @@
     $("#outTitle").textContent = o.title;
     $("#outSub").textContent = o.sub;
     $("#outBody").innerHTML = o.sections.map((s) => {
-      let h = `<div class="prop-sec"><h3>${esc(s.h)}${s.weight ? `<span class="w-pill">${s.weight}${LANG === "fr" ? " %" : "%"}</span>` : ""}</h3>`;
+      let h = `<div class="prop-sec"><h3>${esc(s.h)}${s.weight ? `<span class="w-pill">${s.weight}%</span>` : ""}</h3>`;
       if (s.items) h += `<ul class="out-items">${s.items.map((x) => `<li class="${x.todo ? "todo" : ""}"><p>${x.todo ? `<span class="todo-tag">${T.todo}</span> ` : ""}${esc(fill(x.t))}</p>${srcs(x.cite)}</li>`).join("")}</ul>`;
       if (s.table) {
         const flagHtml = (r, k) => { const f = flagOf(r, k, checks); return f ? `<span class="flag"><i data-lucide="triangle-alert" aria-hidden="true"></i><b>${esc(T.sev[f.sev])}</b> ${esc(fill(f.d))}</span>` : ""; };
