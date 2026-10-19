@@ -4,6 +4,12 @@ No sign-up demo, fictional data only, replay mode (pre-recorded analyses).
 
 - **English (international):** https://nyyoautomation.github.io/nyyo-courtiers-demo/
 
+## Run locally
+
+Run locally: python3 -m http.server
+
+Run it from the repository root, then open http://localhost:8000 in your browser. Opening index.html directly (file://) shows an empty demo, because the browser blocks loading the data files.
+
 Three use cases:
 
 1. **Quote comparison and advice record**: insurer offers side by side on one coverage grid (limits, deductibles, exclusions), checked against the policy wording and the client's needs, then a client summary note ready for review.
