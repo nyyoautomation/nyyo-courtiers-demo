@@ -27,7 +27,7 @@
   const T = {
     fr: {
       page: "p.", min: (m) => (m >= 60 ? Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "") : m + " min"),
-      money: (n) => Number(n).toLocaleString(loc) + " €",
+      money: (n) => Number(n).toLocaleString(loc) + " \u20ac",
       sev: { bad: "Contradiction", warn: "À vérifier", ok: "Cohérent" }, resolved: "Résolu par votre saisie",
       confirm: "Confirmer", dismiss: "Écarter", confirmed: "Confirmé", dismissed: "Écarté", pending: "À trancher",
       triage: (c, d, p) => `${c} confirmé(s) · ${d} écarté(s) · ${p} à trancher`,
