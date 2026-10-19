@@ -230,7 +230,13 @@
        "cite": [
         "E1",
         "E2"
-       ]
+       ],
+       "flags": {
+        "1": {
+         "c": "C1",
+         "d": "The joint report shows another date: check before sending"
+        }
+       }
       },
       {
        "cells": [
@@ -258,7 +264,13 @@
        "cite": [
         "E4",
         "E5"
-       ]
+       ],
+       "flags": {
+        "1": {
+         "c": "C2",
+         "d": "Stock claimed without proof: attach an invoice or inventory"
+        }
+       }
       },
       {
        "cells": [

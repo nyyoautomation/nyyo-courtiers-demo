@@ -9,7 +9,21 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-  const icons = () => window.lucide && window.lucide.createIcons();
+  /* Lucide icons (lucide-static 0.468.0, ISC), inlined at build time: no CDN, rendered in the same task as the markup (no layout shift). */
+  const ICONS = /*ICONS*/{"check":"<path d=\"M20 6 9 17l-5-5\" />","circle-alert":"<circle cx=\"12\" cy=\"12\" r=\"10\" /> <line x1=\"12\" x2=\"12\" y1=\"8\" y2=\"12\" /> <line x1=\"12\" x2=\"12.01\" y1=\"16\" y2=\"16\" />","circle-check":"<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"m9 12 2 2 4-4\" />","file-search":"<path d=\"M14 2v4a2 2 0 0 0 2 2h4\" /> <path d=\"M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3\" /> <path d=\"m9 18-1.5-1.5\" /> <circle cx=\"5\" cy=\"14\" r=\"3\" />","file-text":"<path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\" /> <path d=\"M14 2v4a2 2 0 0 0 2 2h4\" /> <path d=\"M10 9H8\" /> <path d=\"M16 13H8\" /> <path d=\"M16 17H8\" />","file-type":"<path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\" /> <path d=\"M14 2v4a2 2 0 0 0 2 2h4\" /> <path d=\"M9 13v-1h6v1\" /> <path d=\"M12 12v6\" /> <path d=\"M11 18h2\" />","file-warning":"<path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\" /> <path d=\"M12 9v4\" /> <path d=\"M12 17h.01\" />","images":"<path d=\"M18 22H4a2 2 0 0 1-2-2V6\" /> <path d=\"m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18\" /> <circle cx=\"12\" cy=\"8\" r=\"2\" /> <rect width=\"16\" height=\"16\" x=\"6\" y=\"2\" rx=\"2\" />","notebook-pen":"<path d=\"M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4\" /> <path d=\"M2 6h4\" /> <path d=\"M2 10h4\" /> <path d=\"M2 14h4\" /> <path d=\"M2 18h4\" /> <path d=\"M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z\" />","octagon-alert":"<path d=\"M12 16h.01\" /> <path d=\"M12 8v4\" /> <path d=\"M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z\" />","pencil":"<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />","refresh-cw":"<path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\" /> <path d=\"M21 3v5h-5\" /> <path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\" /> <path d=\"M8 16H3v5\" />","scale":"<path d=\"m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z\" /> <path d=\"m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z\" /> <path d=\"M7 21h10\" /> <path d=\"M12 3v18\" /> <path d=\"M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2\" />","sheet":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <line x1=\"3\" x2=\"21\" y1=\"9\" y2=\"9\" /> <line x1=\"3\" x2=\"21\" y1=\"15\" y2=\"15\" /> <line x1=\"9\" x2=\"9\" y1=\"9\" y2=\"21\" /> <line x1=\"15\" x2=\"15\" y1=\"9\" y2=\"21\" />","triangle-alert":"<path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\" /> <path d=\"M12 9v4\" /> <path d=\"M12 17h.01\" />","x":"<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />"}/*/ICONS*/;
+  const icons = (root = document) => root.querySelectorAll("i[data-lucide]").forEach((el) => {
+    const n = el.getAttribute("data-lucide"), b = ICONS[n]; if (!b) return;
+    el.insertAdjacentHTML("afterend", `<svg class="lucide lucide-${n}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${b}</svg>`);
+    el.remove();
+  });
+  /* docx (Word export) is loaded only when the user asks for it. */
+  const DOCX_URL = "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js";
+  let docxP = null;
+  const loadDocx = () => window.docx ? Promise.resolve(window.docx) : (docxP = docxP || new Promise((ok, ko) => {
+    const s = document.createElement("script"); s.src = DOCX_URL; s.async = true;
+    s.onload = () => (window.docx ? ok(window.docx) : ko(new Error("docx"))); s.onerror = () => { docxP = null; ko(new Error("docx")); };
+    document.head.appendChild(s);
+  }));
   const T = {
     fr: {
       page: "p.", min: (m) => (m >= 60 ? Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "") : m + " min"),
@@ -20,9 +34,8 @@
       checksOk: (n, t) => `${n}/${t} contrôles au vert`, impact: "Impact", action: "Action proposée",
       todo: "À compléter", srcKicker: "Extrait de la pièce (fictive)", openSrc: "Voir l'extrait", fromDoc: "Extraits utilisés dans cette pièce",
       inputKicker: "Votre saisie", stale: "Vos saisies ont changé : le brouillon est mis à jour.",
-      saved: (b, a) => `≈ ${Math.round((1 - a / b) * 100)} %`, savedLbl: "de temps en moins sur ce cas : estimation sur cet échantillon fictif, pas une mesure",
-      total: "Total", errAvoid: "Erreurs évitées sur cet échantillon fictif : ",
-      docxLoading: "La bibliothèque Word se charge encore. Réessayez dans une seconde.",
+            total: "Total", errAvoid: "Erreurs évitées sur cet échantillon fictif : ",
+      docxLoading: "La bibliothèque Word n'a pas pu se charger. Vérifiez votre connexion et réessayez.",
       docxWarn: "RELECTURE HUMAINE OBLIGATOIRE. Données fictives de démonstration. Votre cabinet reste seul responsable du conseil donné et de tout document réel. Les écarts signalés sont des propositions : le courtier tranche.",
       docxHeader: "Brouillon · relecture humaine obligatoire · données fictives",
       contra: "Contrôle des contradictions", checks: "Contrôles sur vos saisies", srcAppx: "Annexe : sources citées",
@@ -30,7 +43,7 @@
       footer: "Généré par la démo Nyyo Automation · données fictives · ne remplace pas le conseil du courtier",
       pageOf: ["Page ", " / "], weight: (w) => ` (${w} %)`, project: "Projet", firm: "Cabinet",
       title: (n) => `${n} — IA pour courtiers en assurance · Nyyo Automation`, loadFail: "Échec du chargement des données : ",
-      genFirst: "Lancez d'abord l'analyse.", printWarn: "RELECTURE HUMAINE OBLIGATOIRE · exemple fictif",
+      genFirst: "Lancez d'abord l'analyse.", srcLbl: "Sources", more: "Lire la suite", best: "Meilleur", viewSrc: (n) => `Voir les sources (${n})`, byHand: "À la main (estim.)", withTool: "Avec l'outil (estim.)", printWarn: "RELECTURE HUMAINE OBLIGATOIRE · exemple fictif",
     },
     en: {
       page: "p.", min: (m) => (m >= 60 ? Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "") : m + " min"),
@@ -41,9 +54,8 @@
       checksOk: (n, t) => `${n}/${t} checks passing`, impact: "Impact", action: "Suggested action",
       todo: "To complete", srcKicker: "Extract from the (fictional) document", openSrc: "View extract", fromDoc: "Extracts used from this document",
       inputKicker: "Your input", stale: "Your inputs changed: the draft has been updated.",
-      saved: (b, a) => `≈ ${Math.round((1 - a / b) * 100)}%`, savedLbl: "less time on this case: estimate on this fictional sample, not a measurement",
-      total: "Total", errAvoid: "Errors avoided on this fictional sample: ",
-      docxLoading: "The Word library is still loading. Try again in a second.",
+            total: "Total", errAvoid: "Errors avoided on this fictional sample: ",
+      docxLoading: "The Word library could not load. Check your connection and try again.",
       docxWarn: "HUMAN REVIEW REQUIRED. Fictional demo data. Your brokerage remains solely responsible for the advice given and for any real document. Flagged discrepancies are suggestions: the broker decides.",
       docxHeader: "Draft · human review required · fictional data",
       contra: "Contradiction check", checks: "Checks on your inputs", srcAppx: "Appendix: cited sources",
@@ -51,7 +63,7 @@
       footer: "Generated by the Nyyo Automation demo · fictional data · does not replace the broker's advice",
       pageOf: ["Page ", " / "], weight: (w) => ` (${w}%)`, project: "Project", firm: "Brokerage",
       title: (n) => `${n}: AI for insurance brokers · Nyyo Automation`, loadFail: "Demo data failed to load: ",
-      genFirst: "Run the analysis first.", printWarn: "HUMAN REVIEW REQUIRED · fictional sample",
+      genFirst: "Run the analysis first.", srcLbl: "Sources", more: "Read more", best: "Best", viewSrc: (n) => `View sources (${n})`, byHand: "By hand (est.)", withTool: "With the tool (est.)", printWarn: "HUMAN REVIEW REQUIRED · fictional sample",
     },
   }[LANG];
 
@@ -96,11 +108,18 @@
   }
 
   /* ---------- citations ---------- */
+  const refTxt = (e, s) => `${s.name} · ${s.unit === "p." ? T.page + e.page + " · " : ""}${e.loc}`;
   function cite(id) {
     const e = ex(id); if (!e) return "";
     const s = src(e.src);
-    return `<button type="button" class="cite cite-btn" data-ex="${esc(id)}" title="${esc(T.openSrc)}"><i data-lucide="file-search"></i>${esc(s.name)} · ${s.unit === "p." ? T.page + e.page : esc(e.loc)}${s.unit === "p." ? " · " + esc(e.loc) : ""}</button>`;
+    return `<button type="button" class="chip cite-btn" data-ex="${esc(id)}" aria-label="${esc(T.openSrc + ": " + refTxt(e, s))}"><span class="chip-ref mono"><i data-lucide="file-search" aria-hidden="true"></i>${esc(refTxt(e, s))}</span><span class="chip-q">${esc(e.text)}</span><span class="chip-more">${T.more}</span></button>`;
   }
+  function citeMini(id) {
+    const e = ex(id); if (!e) return "";
+    const s = src(e.src);
+    return `<button type="button" class="chip chip-mini cite-btn" data-ex="${esc(id)}" aria-label="${esc(T.openSrc + ": " + refTxt(e, s))}"><span class="chip-ref mono"><i data-lucide="file-search" aria-hidden="true"></i>${esc(refTxt(e, s))}</span></button>`;
+  }
+  const srcs = (ids) => (ids && ids.length ? `<details class="srcs"><summary>${T.viewSrc(ids.length)}</summary><div class="chips">${ids.map(cite).join(" ")}</div></details>` : "");
   function citeTxt(id) { const e = ex(id), s = src(e.src); return `${s.name}, ${s.unit === "p." ? T.page + e.page + ", " : ""}${e.loc}`; }
 
   /* ---------- tabs ---------- */
@@ -134,7 +153,9 @@
     $("#valueCase").textContent = v.case;
     $("#valueRows").innerHTML = v.rows.map((r) => `<tr><td>${esc(r[0])}</td><td class="v-before">${T.min(r[1])}</td><td class="v-after">${T.min(r[2])}</td></tr>`).join("") +
       `<tr class="v-total"><td>${T.total}</td><td class="v-before">${T.min(v.total[0])}</td><td class="v-after">${T.min(v.total[1])}</td></tr>`;
-    const stats = [[T.saved(v.total[0], v.total[1]), T.savedLbl], ...v.stats];
+    $("#valueCards").innerHTML = v.rows.map((r) => `<div class="m-card"><strong class="m-title">${esc(r[0])}</strong><div class="m-ba"><span><small>${T.byHand}</small><b class="v-before">${T.min(r[1])}</b></span><span><small>${T.withTool}</small><b class="v-after">${T.min(r[2])}</b></span></div></div>`).join("") +
+      `<div class="m-card m-total"><strong class="m-title">${T.total}</strong><div class="m-ba"><span><small>${T.byHand}</small><b class="v-before">${T.min(v.total[0])}</b></span><span><small>${T.withTool}</small><b class="v-after">${T.min(v.total[1])}</b></span></div></div>`;
+    const stats = v.stats;
     $("#valueStats").innerHTML = stats.map((s) => `<div class="v-stat"><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div>`).join("") +
       `<div class="v-stat v-err"><span><strong>${T.errAvoid}</strong>${v.errors.map(esc).join(LANG === "fr" ? " ; " : "; ")}.</span></div>`;
   }
@@ -183,7 +204,7 @@
   }
   function renderChecks() {
     const res = runChecks(), ok = res.filter((r) => r.pass).length;
-    $("#checks").innerHTML = res.map((r) => `<li class="chk ${r.pass ? "pass" : "fail"}"><i data-lucide="${r.pass ? "circle-check" : "circle-alert"}"></i><div><strong>${esc(r.label)}</strong><span>${esc(r.msg)}</span></div>${cite(r.ref)}</li>`).join("");
+    $("#checks").innerHTML = res.map((r) => `<li class="chk ${r.pass ? "pass" : "fail"}"><i data-lucide="${r.pass ? "circle-check" : "circle-alert"}"></i><div><strong>${esc(r.label)}</strong><span>${esc(r.msg)}</span>${srcs([r.ref])}</div></li>`).join("");
     $("#checksSummary").textContent = T.checksOk(ok, res.length);
     $("#checksSummary").className = "pill " + (ok === res.length ? "ok" : "bad");
     icons();
@@ -195,9 +216,15 @@
     $("#outTitle").textContent = o.title;
     $("#outSub").textContent = o.sub;
     $("#outBody").innerHTML = o.sections.map((s) => {
-      let h = `<div class="prop-sec"><h3>${esc(s.h)}${s.weight ? `<span class="w-pill">${s.weight} %</span>` : ""}</h3>`;
-      if (s.items) h += `<ul>${s.items.map((x) => `<li class="${x.todo ? "todo" : ""}">${x.todo ? `<span class="todo-tag">${T.todo}</span> ` : ""}${esc(fill(x.t))} ${x.cite.map(cite).join(" ")}</li>`).join("")}</ul>`;
-      if (s.table) h += `<div class="table-scroll"><table class="table act-table"><thead><tr>${s.table.head.map((c) => `<th>${esc(c)}</th>`).join("")}<th>Source</th></tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.cells.map((c) => `<td>${esc(fill(c))}</td>`).join("")}<td>${r.cite.map(cite).join(" ")}</td></tr>`).join("")}</tbody></table></div>`;
+      let h = `<div class="prop-sec"><h3>${esc(s.h)}${s.weight ? `<span class="w-pill">${s.weight}${LANG === "fr" ? " %" : "%"}</span>` : ""}</h3>`;
+      if (s.items) h += `<ul class="out-items">${s.items.map((x) => `<li class="${x.todo ? "todo" : ""}"><p>${x.todo ? `<span class="todo-tag">${T.todo}</span> ` : ""}${esc(fill(x.t))}</p>${srcs(x.cite)}</li>`).join("")}</ul>`;
+      if (s.table) {
+        const flagHtml = (r, k) => { const f = flagOf(r, k, checks); return f ? `<span class="flag"><i data-lucide="triangle-alert" aria-hidden="true"></i><b>${esc(T.sev[f.sev])}</b> ${esc(fill(f.d))}</span>` : ""; };
+        const best = (r, k) => ((r.best || []).includes(k) ? ` <span class="best">${T.best}</span>` : "");
+        h += `<div class="m-cards">${s.table.rows.map((r) => `<div class="m-card"><h4 class="m-title">${esc(fill(r.cells[0]))}</h4><dl>${r.cells.slice(1).map((c, i) => `<div class="m-kv${flagOf(r, i + 1, checks) ? " is-flag" : ""}"><dt>${esc(s.table.head[i + 1])}</dt><dd><span class="num">${esc(fill(c))}</span>${best(r, i + 1)}${flagHtml(r, i + 1)}</dd></div>`).join("")}</dl>${srcs(r.cite)}</div>`).join("")}</div>`;
+        h += `<div class="d-table"><div class="table-wrap" tabindex="0" role="region" aria-label="${esc(s.h)}"><table class="table cmp-table"><thead><tr>${s.table.head.map((c) => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.cells.map((c, k) => (k === 0 ? `<th scope="row">${esc(fill(c))}</th>` : `<td class="${flagOf(r, k, checks) ? "is-flag" : ""}"><span class="num">${esc(fill(c))}</span>${best(r, k)}${flagHtml(r, k)}</td>`)).join("")}</tr>`).join("")}</tbody></table></div>
+          <details class="srcs"><summary>${T.viewSrc([...new Set(s.table.rows.flatMap((r) => r.cite))].length)}</summary>${s.table.rows.map((r) => `<div class="srcs-group"><p class="srcs-h">${esc(fill(r.cells[0]))}</p><div class="chips">${r.cite.map(cite).join(" ")}</div></div>`).join("")}</details></div>`;
+      }
       return h + "</div>";
     }).join("");
     renderContra(checks);
@@ -208,10 +235,10 @@
     const cs = st.u.contradictions;
     $("#contra").innerHTML = cs.map((c) => {
       const s = cStatus(c, checks), tri = st.triage[c.id];
-      const sides = c.sides.map((sd) => `<div class="side"><small>${esc(sd.label)}</small><strong>${esc(sideVal(sd))}</strong>${ex(sd.e) ? cite(sd.e) : `<span class="cite cite-input"><i data-lucide="pencil"></i>${T.inputKicker}</span>`}</div>`).join(`<span class="vs">${s.sev === "ok" && !s.resolved ? "=" : "≠"}</span>`);
+      const sides = c.sides.map((sd) => `<div class="side"><small>${esc(sd.label)}</small><strong>${esc(sideVal(sd))}</strong>${ex(sd.e) ? citeMini(sd.e) : `<span class="cite cite-input"><i data-lucide="pencil"></i>${T.inputKicker}</span>`}</div>`).join(`<span class="vs">${s.sev === "ok" && !s.resolved ? "=" : "≠"}</span>`);
       const btns = s.sev === "ok" ? `<span class="pill ok">${s.resolved ? T.resolved : T.sev.ok}</span>` :
         `<div class="tri"><button type="button" class="btn btn-ghost tri-btn ${tri === "c" ? "on" : ""}" data-tri="${c.id}" data-v="c"><i data-lucide="check"></i>${tri === "c" ? T.confirmed : T.confirm}</button><button type="button" class="btn btn-ghost tri-btn ${tri === "d" ? "on" : ""}" data-tri="${c.id}" data-v="d"><i data-lucide="x"></i>${tri === "d" ? T.dismissed : T.dismiss}</button></div>`;
-      return `<div class="ct-card sev-${s.sev}${tri === "d" ? " dismissed" : ""}" id="ct-${c.id}"><div class="ct-head"><span class="pill ${s.sev === "bad" ? "bad" : s.sev === "ok" ? "ok" : "warn"}">${esc(T.sev[s.sev])}</span><strong>${esc(c.title)}</strong></div>
+      return `<div class="ct-card sev-${s.sev}${tri === "d" ? " dismissed" : ""}" id="ct-${c.id}"><div class="ct-head"><span class="pill ${s.sev === "ok" ? "ok" : "warn"}"><i data-lucide="${s.sev === "ok" ? "circle-check" : s.sev === "bad" ? "octagon-alert" : "triangle-alert"}" aria-hidden="true"></i>${esc(T.sev[s.sev])}</span><strong>${esc(c.title)}</strong></div>
         <div class="ct-sides">${sides}</div>
         ${s.sev === "ok" ? "" : `<p class="ct-p"><b>${T.impact}${SEP}</b> ${esc(c.impact)}</p><p class="ct-p"><b>${T.action}${SEP}</b> ${esc(c.action)}</p>`}
         ${btns}</div>`;
@@ -232,10 +259,16 @@
     openModal(`<p class="src-kicker">${T.srcKicker}</p><h3>${esc(s.name)} · ${esc(s.kind)} · ${s.pages} ${esc(s.unit)}</h3><h4>${T.fromDoc}</h4>${list.map((e) => `<blockquote class="src-quote"><span class="mono">${s.unit === "p." ? T.page + e.page + " · " : ""}${esc(e.loc)}</span>${esc(e.text)}</blockquote>`).join("")}`);
   }
 
+  function flagOf(r, i, checks) {
+    const f = r.flags && r.flags[i]; if (!f) return null;
+    const c = st.u.contradictions.find((x) => x.id === f.c); if (!c) return null;
+    const s = cStatus(c, checks || runChecks()); return s.sev === "ok" ? null : { ...f, sev: s.sev };
+  }
   /* ---------- DOCX ---------- */
   async function downloadDocx() {
     if (!st.ready) { alert(T.genFirst); return; }
-    const D = window.docx; if (!D) { alert(T.docxLoading); return; }
+    let D; const btn = $("#btnDocx"); btn.disabled = true;
+    try { D = await loadDocx(); } catch (e) { alert(T.docxLoading); return; } finally { btn.disabled = false; }
     const { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType, BorderStyle, Header, Footer, PageNumber, AlignmentType, ShadingType } = D;
     const u = st.u, checks = runChecks(), used = new Set();
     const bd = { style: BorderStyle.SINGLE, size: 4, color: "C9D3E3" }, borders = { top: bd, bottom: bd, left: bd, right: bd };
@@ -257,7 +290,7 @@
       (s.items || []).forEach((x) => ch.push(new Paragraph({ bullet: { level: 0 }, spacing: { after: 80 }, children: [...(x.todo ? [new TextRun({ text: T.todo.toUpperCase() + SEP + " ", bold: true, color: "B54708" })] : []), new TextRun(fill(x.t)), ...srcRun(x.cite)] })));
       if (s.table) {
         const n = s.table.head.length, ws = n === 5 ? [700, 700, 3900, 1300, 1400] : Array(n).fill(Math.floor(8000 / n));
-        ch.push(table([...ws, 1800], [...s.table.head, "Source"], s.table.rows.map((r) => { r.cite.forEach((i) => used.add(i)); return [...r.cells.map(fill), r.cite.map(citeTxt).join(" ; ")]; })));
+        ch.push(table([...ws, 1800], [...s.table.head, "Source"], s.table.rows.map((r) => { r.cite.forEach((i) => used.add(i)); return [...r.cells.map((c, i) => { const f = i && flagOf(r, i, checks); return fill(c) + ((r.best || []).includes(i) ? " (" + T.best + ")" : "") + (f ? " — " + T.sev[f.sev] + SEP + " " + f.d : ""); }), r.cite.map(citeTxt).join(" ; ")]; })));
       }
     }
     ch.push(new Paragraph({ text: T.contra, heading: HeadingLevel.HEADING_1, spacing: { before: 280, after: 120 } }));
@@ -286,6 +319,7 @@
     if (!st.ready) { alert(T.genFirst); return; }
     const root = $("#printRoot");
     root.innerHTML = `<div class="print-doc"><h1>${esc(st.u.output.title)}</h1><p class="pw">${T.printWarn}</p><p>${esc(st.u.project.title)}</p>${$("#outBody").innerHTML}<h2>${T.contra}</h2>${$("#contra").innerHTML}<h2>${T.checks}</h2><ul>${$("#checks").innerHTML}</ul></div>`;
+    root.querySelectorAll("details").forEach((d) => (d.open = true));
     root.classList.remove("hidden");
     const prev = document.title; document.title = st.u.docx; window.print(); document.title = prev;
     setTimeout(() => { root.classList.add("hidden"); root.innerHTML = ""; }, 500);

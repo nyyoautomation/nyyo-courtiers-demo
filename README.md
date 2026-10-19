@@ -13,4 +13,6 @@ Three use cases:
 
 Every result cites its source (document, page, clause), runs a contradiction check (confirm or dismiss each item) and shows a human-review banner. The tool gives no advice and sends nothing to an insurer or client. Live input checks, triage and Word export run in the browser.
 
-Figures shown are estimates on the fictional sample, not promises. Pricing: on quote. Available on LaborX · Remote · Worldwide.
+Mobile-first layout: below 720 px every comparison is a stack of cards with a Best badge and collapsible sources; no page-level horizontal scroll at 360 or 390 px. From 720 px up, a table with a sticky first column.
+
+Figures shown are estimates on the fictional sample, not promises. Pricing: on quote (Request a quote). Nyyo Automation · Noah Vasseur · Available on LaborX · Remote · Worldwide.
