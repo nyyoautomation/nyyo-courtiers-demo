@@ -136,7 +136,7 @@
  ],
  "fields": [
   {
-   "id": "prime",
+   "id": "premium",
    "label": "Premium of the chosen offer",
    "type": "money",
    "value": 9400,
@@ -152,7 +152,7 @@
    "hint": "Value from the needs questionnaire: to review with the client"
   },
   {
-   "id": "motif",
+   "id": "reason",
    "label": "Reason for the recommendation",
    "type": "text",
    "value": "Only offer with $3M liability, machinery breakdown and 12 months of business interruption with no restriction",
@@ -160,7 +160,7 @@
    "hint": ""
   },
   {
-   "id": "date_fic",
+   "id": "date_record",
    "label": "Advice record handed to the client",
    "type": "date",
    "value": "2026-11-20",
@@ -174,13 +174,13 @@
    "label": "Premium within the client's budget ($9,500)",
    "ref": "E2",
    "rule": {
-    "f": "prime",
+    "f": "premium",
     "op": "<=",
     "v": 9500,
     "vf": null
    },
-   "ok": "{prime}: within budget",
-   "ko": "{prime}: over budget"
+   "ok": "{premium}: within budget",
+   "ko": "{premium}: over budget"
   },
   {
    "id": "Q2",
@@ -200,7 +200,7 @@
    "label": "Recommendation reasoned",
    "ref": "E1",
    "rule": {
-    "f": "motif",
+    "f": "reason",
     "op": "nonempty",
     "v": null,
     "vf": null
@@ -213,13 +213,13 @@
    "label": "Advice record handed over before binding (Dec 1, 2026)",
    "ref": "E2",
    "rule": {
-    "f": "date_fic",
+    "f": "date_record",
     "op": "<",
     "v": "2026-12-01",
     "vf": null
    },
-   "ok": "Handed over {date_fic}",
-   "ko": "Handed over {date_fic}: too late"
+   "ok": "Handed over {date_record}",
+   "ko": "Handed over {date_record}: too late"
   }
  ],
  "output": {
@@ -373,7 +373,7 @@
     "h": "Recommended offer and reasoning",
     "items": [
      {
-      "t": "Recommended offer: Alder Insurance, {prime} a year. Reason: {motif}.",
+      "t": "Recommended offer: Alder Insurance, {premium} a year. Reason: {reason}.",
       "cite": [
        "E3"
       ],
@@ -409,7 +409,7 @@
     "h": "Advice and suitability record",
     "items": [
      {
-      "t": "Handed to the client on {date_fic}, before the planned binding on Dec 1, 2026.",
+      "t": "Handed to the client on {date_record}, before the planned binding on Dec 1, 2026.",
       "cite": [
        "E2"
       ],
@@ -521,9 +521,9 @@
      "v": "$9,500 maximum"
     },
     {
-     "e": "prime",
+     "e": "premium",
      "label": "Your input",
-     "v": "{prime}"
+     "v": "{premium}"
     }
    ],
    "impact": "No discrepancy.",

@@ -136,7 +136,7 @@
  ],
  "fields": [
   {
-   "id": "date_sin",
+   "id": "date_loss",
    "label": "Date of loss used",
    "type": "date",
    "value": "2026-10-11",
@@ -144,7 +144,7 @@
    "hint": "Date from the client's email: to confirm"
   },
   {
-   "id": "date_decl",
+   "id": "date_submitted",
    "label": "Date submitted to the insurer",
    "type": "date",
    "value": "2026-10-20",
@@ -152,7 +152,7 @@
    "hint": ""
   },
   {
-   "id": "montant",
+   "id": "amount",
    "label": "Estimated amount of loss",
    "type": "money",
    "value": 12760,
@@ -166,39 +166,39 @@
    "label": "Date of loss matches the joint report (Oct 13, 2026)",
    "ref": "E2",
    "rule": {
-    "f": "date_sin",
+    "f": "date_loss",
     "op": "==",
     "v": "2026-10-13",
     "vf": null
    },
-   "ok": "{date_sin}: matches the report",
-   "ko": "{date_sin}: differs from the report"
+   "ok": "{date_loss}: matches the report",
+   "ko": "{date_loss}: differs from the report"
   },
   {
    "id": "Q2",
    "label": "Notified within 5 working days (by Oct 20, 2026)",
    "ref": "E7",
    "rule": {
-    "f": "date_decl",
+    "f": "date_submitted",
     "op": "<=",
     "v": "2026-10-20",
     "vf": null
    },
-   "ok": "Submitted {date_decl}",
-   "ko": "Submitted {date_decl}: late"
+   "ok": "Submitted {date_submitted}",
+   "ko": "Submitted {date_submitted}: late"
   },
   {
    "id": "Q3",
    "label": "Amount above the deductible ($500)",
    "ref": "E6",
    "rule": {
-    "f": "montant",
+    "f": "amount",
     "op": ">",
     "v": 500,
     "vf": null
    },
-   "ok": "{montant} estimated",
-   "ko": "{montant}: below the deductible"
+   "ok": "{amount} estimated",
+   "ko": "{amount}: below the deductible"
   }
  ],
  "output": {
@@ -225,7 +225,7 @@
       {
        "cells": [
         "Date of loss",
-        "{date_sin}"
+        "{date_loss}"
        ],
        "cite": [
         "E1",
@@ -275,7 +275,7 @@
       {
        "cells": [
         "Estimated amount",
-        "{montant}"
+        "{amount}"
        ],
        "cite": [
         "E3",
@@ -298,7 +298,7 @@
       "todo": false
      },
      {
-      "t": "Notification deadline: 5 working days. Planned submission: {date_decl}.",
+      "t": "Notification deadline: 5 working days. Planned submission: {date_submitted}.",
       "cite": [
        "E7"
       ],
